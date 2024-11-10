@@ -1,8 +1,66 @@
+<script setup>
+import { ref } from 'vue'
+import { Dialog, DialogPanel } from '@headlessui/vue'
+import { Star, Search, X, MoreVertical, ChevronDown, ChevronUp, ThumbsUp, ThumbsDown } from 'lucide-vue-next'
+
+const isOpen = ref(false)
+const openModal = () => {
+    isOpen.value = true
+}
+const closeModal = () => {
+    isOpen.value = false
+}
+
+const ratings = [
+    { stars: 5, percentage: 61 },
+    { stars: 4, percentage: 30 },
+    { stars: 3, percentage: 8 },
+    { stars: 2, percentage: 1 },
+    { stars: 1, percentage: 0 }
+]
+
+const reviews = ref([
+    {
+        id: 1,
+        name: 'Rommel S.',
+        initials: 'RS',
+        rating: 5,
+        timeAgo: '4 months ago',
+        text: '"User Experience (UX): The Ultimate Guide to Usability and UX" on Udemy is an outstanding course that provides a comprehensive introduction to UX design and usability. It is well-organized, covering everything from the basics of UX design to advanced usability testing, ensuring a smooth learning curve for beginners and valuable insights for experienced professionals. The course includes practical examples and real-world case studies, making complex concepts easy to understand and apply. Emphasizing a user-centered approach, it teaches learners to design with the user in mind, which is crucial for creating effective and engaging digital experiences.',
+        isExpanded: false
+    },
+    {
+        id: 2,
+        name: 'Eliza S.',
+        initials: 'ES',
+        rating: 5,
+        timeAgo: '8 months ago',
+        text: 'I find the overall experience inspiring and the course accomplishable. D. Travis is an excellent teacher, expert in the field. The lessons are full of theory and activities, allowing to build skill as well as understanding. He tackles difficult topics with ease and fun. There are quite many resources suggested for further learning as well. What I find important, is that the course is kept updated and I have a "busy" feeling around it as there are many Q&A under each lesson and a couple of ways how to contact the teacher.',
+        isExpanded: false
+    },
+    {
+        id: 3,
+        name: '허인국',
+        initials: '허',
+        rating: 5,
+        timeAgo: '9 months ago',
+        text: 'He takes us many quize and knowhow which helps us to reach end of course. He is good teacher for us.',
+        isExpanded: false
+    }
+])
+
+const toggleExpand = (id) => {
+    const review = reviews.value.find(r => r.id === id)
+    if (review) {
+        review.isExpanded = !review.isExpanded
+    }
+}
+</script>
+
 <template>
     <div class="w-[60%] mx-auto">
-        
-        <button @click="openModal"
-            class="px-6 py-2 text-sm font-medium border border-gray-800  hover:bg-gray-50">
+
+        <button @click="openModal" class="px-6 py-2 text-sm font-medium border border-gray-800 hover:bg-gray-50">
             Show all reviews
         </button>
 
@@ -12,7 +70,7 @@
             <div class="fixed inset-0 overflow-y-auto">
                 <div class="flex items-start justify-center min-h-full p-4">
                     <DialogPanel class="w-full max-w-4xl p-6 mt-8 bg-white rounded-lg">
-                        
+
                         <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-3">
                                 <Star class="w-6 h-6 text-yellow-400 fill-current" />
@@ -26,7 +84,7 @@
                         </div>
 
                         <div class="flex gap-8">
-                            
+
                             <div class="w-64 space-y-4">
                                 <div v-for="(rating, index) in ratings" :key="index" class="flex items-center gap-2">
                                     <div class="flex items-center w-24 gap-1">
@@ -42,7 +100,7 @@
                                     <span class="w-12 text-sm text-gray-600">{{ rating.percentage }}%</span>
                                 </div>
 
-                                
+
                                 <div class="relative">
                                     <input type="text" placeholder="Search reviews"
                                         class="w-full py-2 pl-8 pr-4 border rounded-md" />
@@ -50,7 +108,7 @@
                                 </div>
                             </div>
 
-                            
+
                             <div class="flex-1 space-y-8">
                                 <div v-for="review in reviews" :key="review.id" class="pb-6 border-b">
                                     <div class="flex items-start gap-4">
@@ -116,62 +174,3 @@
         </Dialog>
     </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { Dialog, DialogPanel } from '@headlessui/vue'
-import { Star, Search, X, MoreVertical, ChevronDown, ChevronUp, ThumbsUp, ThumbsDown } from 'lucide-vue-next'
-
-const isOpen = ref(false)
-const openModal = () => {
-    isOpen.value = true
-}
-const closeModal = () => {
-    isOpen.value = false
-}
-
-const ratings = [
-    { stars: 5, percentage: 61 },
-    { stars: 4, percentage: 30 },
-    { stars: 3, percentage: 8 },
-    { stars: 2, percentage: 1 },
-    { stars: 1, percentage: 0 }
-]
-
-const reviews = ref([
-    {
-        id: 1,
-        name: 'Rommel S.',
-        initials: 'RS',
-        rating: 5,
-        timeAgo: '4 months ago',
-        text: '"User Experience (UX): The Ultimate Guide to Usability and UX" on Udemy is an outstanding course that provides a comprehensive introduction to UX design and usability. It is well-organized, covering everything from the basics of UX design to advanced usability testing, ensuring a smooth learning curve for beginners and valuable insights for experienced professionals. The course includes practical examples and real-world case studies, making complex concepts easy to understand and apply. Emphasizing a user-centered approach, it teaches learners to design with the user in mind, which is crucial for creating effective and engaging digital experiences.',
-        isExpanded: false
-    },
-    {
-        id: 2,
-        name: 'Eliza S.',
-        initials: 'ES',
-        rating: 5,
-        timeAgo: '8 months ago',
-        text: 'I find the overall experience inspiring and the course accomplishable. D. Travis is an excellent teacher, expert in the field. The lessons are full of theory and activities, allowing to build skill as well as understanding. He tackles difficult topics with ease and fun. There are quite many resources suggested for further learning as well. What I find important, is that the course is kept updated and I have a "busy" feeling around it as there are many Q&A under each lesson and a couple of ways how to contact the teacher.',
-        isExpanded: false
-    },
-    {
-        id: 3,
-        name: '허인국',
-        initials: '허',
-        rating: 5,
-        timeAgo: '9 months ago',
-        text: 'He takes us many quize and knowhow which helps us to reach end of course. He is good teacher for us.',
-        isExpanded: false
-    }
-])
-
-const toggleExpand = (id) => {
-    const review = reviews.value.find(r => r.id === id)
-    if (review) {
-        review.isExpanded = !review.isExpanded
-    }
-}
-</script>

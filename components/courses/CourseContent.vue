@@ -1,63 +1,3 @@
-<template>
-    <div class="py-8 w-[60%] mx-auto flex flex-col items-start text-gray-800">
-        <div class="w-[67%]">
-            <h2 class="text-3xl font-bold mb-4 font-sans">Course content</h2>
-            <div class="flex justify-between items-center mb-4">
-                <p class="text-sm text-gray-700">
-                    75 sections • 731 lectures • 74h 13m total length
-                </p>
-                <button @click="expandAll = !expandAll"
-                    class="text-purple-700 font-sans hover:underline text-sm font-bold">
-                    {{ expandAll ? 'Collapse all Courses' : 'Expand all Courses' }}
-                </button>
-            </div>
-
-
-            <div v-for="(section, index) in courseContent" :key="index" class="">
-                <div @click="toggleSection(index)" :class="[
-                    'flex justify-between items-center cursor-pointer border-gray-300 py-4 pl-6 pr-4 bg-gray-50',
-                    section.isExpanded || expandAll || index === courseContent.length - 1 ? 'border-l border-r border-t border-b' : 'border-l border-r border-t'
-                ]">
-                    <div class="flex items-center">
-                        <svg v-if="section.isExpanded" class="w-4 h-4 mr-3" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
-                            </path>
-                        </svg>
-                        <svg v-else class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                        <h3 class=" font-bold">{{ section.title }}</h3>
-                    </div>
-                    <span class="text-gray-800 text-sm">{{ section.duration }}</span>
-                </div>
-                <div v-if="section.isExpanded || expandAll"
-                    :class="['py-4 px-4 border-l border-r border-gray-300', index === courseContent.length - 1 ? 'border-b' : '']">
-                    <div v-for="(item, itemIndex) in section.items" :key="itemIndex"
-                        class="flex items-center px-4 w-full mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-camera-video mr-4" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z" />
-                        </svg>
-
-                        <div class="flex items-center justify-between w-full ">
-                            <a v-if="item.type === 'video'" :href="item.preview"
-                                class="text-purple-600 hover:underline text-sm flex-grow">{{ item.title }}</a>
-                            <span v-else class="text-sm flex-grow">{{ item.title }}</span>
-                            <span class="text-sm">{{ item.duration }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="border border-black text-black w-full mt-3 py-2.5 text-sm font-bold hover:bg-slate-200">2 More Sections</button>
-        </div>
-    </div>
-</template>
-
 <script>
 export default {
     name: 'CourseContent',
@@ -206,3 +146,64 @@ export default {
     }
 }
 </script>
+
+<template>
+    <div class="py-8 w-[60%] mx-auto flex flex-col items-start text-gray-800">
+        <div class="w-[67%]">
+            <h2 class="mb-4 font-sans text-3xl font-bold">Course content</h2>
+            <div class="flex items-center justify-between mb-4">
+                <p class="text-sm text-gray-700">
+                    75 sections • 731 lectures • 74h 13m total length
+                </p>
+                <button @click="expandAll = !expandAll"
+                    class="font-sans text-sm font-bold text-purple-700 hover:underline">
+                    {{ expandAll ? 'Collapse all Courses' : 'Expand all Courses' }}
+                </button>
+            </div>
+
+
+            <div v-for="(section, index) in courseContent" :key="index" class="">
+                <div @click="toggleSection(index)" :class="[
+                    'flex justify-between items-center cursor-pointer border-gray-300 py-4 pl-6 pr-4 bg-gray-50',
+                    section.isExpanded || expandAll || index === courseContent.length - 1 ? 'border-l border-r border-t border-b' : 'border-l border-r border-t'
+                ]">
+                    <div class="flex items-center">
+                        <svg v-if="section.isExpanded" class="w-4 h-4 mr-3" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
+                            </path>
+                        </svg>
+                        <svg v-else class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                        <h3 class="font-bold ">{{ section.title }}</h3>
+                    </div>
+                    <span class="text-sm text-gray-800">{{ section.duration }}</span>
+                </div>
+                <div v-if="section.isExpanded || expandAll"
+                    :class="['py-4 px-4 border-l border-r border-gray-300', index === courseContent.length - 1 ? 'border-b' : '']">
+                    <div v-for="(item, itemIndex) in section.items" :key="itemIndex"
+                        class="flex items-center w-full px-4 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="mr-4 bi bi-camera-video" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z" />
+                        </svg>
+
+                        <div class="flex items-center justify-between w-full ">
+                            <a v-if="item.type === 'video'" :href="item.preview"
+                                class="flex-grow text-sm text-purple-600 hover:underline">{{ item.title }}</a>
+                            <span v-else class="flex-grow text-sm">{{ item.title }}</span>
+                            <span class="text-sm">{{ item.duration }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="border border-black text-black w-full mt-3 py-2.5 text-sm font-bold hover:bg-slate-200">2
+                More Sections</button>
+        </div>
+    </div>
+</template>

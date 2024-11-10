@@ -1,9 +1,25 @@
+<script>
+export default {
+    name: 'CourseDescription',
+    data() {
+        return {
+            expanded: false
+        }
+    },
+    methods: {
+        toggleExpansion() {
+            this.expanded = !this.expanded
+        }
+    }
+}
+</script>
+
 <template>
     <div class="w-[60%] mx-auto mt-8 ">
         <div class="w-[67%] text-gray-700">
             <div class="">
-                <h2 class="text-3xl font-bold mb-4 font-sans">Requirments</h2>
-                <ul class="space-y-2 px-6">
+                <h2 class="mb-4 font-sans text-3xl font-bold">Requirments</h2>
+                <ul class="px-6 space-y-2">
                     <li class="list-disc">You don't need a background in user experience, design or coding to take this
                         course.</li>
                     <li class="list-disc">This is an in-depth course. If you allocate 60-90 mins a day, and do all of
@@ -11,8 +27,8 @@
                 </ul>
             </div>
 
-            <div class=" mt-8">
-                <h2 class="text-3xl font-bold mb-4 font-sans">Description</h2>
+            <div class="mt-8 ">
+                <h2 class="mb-4 font-sans text-3xl font-bold">Description</h2>
                 <div class="text-gray-700">
                     <h3 class="text-lg font-bold">2023 Edition.</h3>
                     <p class="mt-2">
@@ -46,7 +62,7 @@
                                 and
                                 Design Projects.</h3>
                             <p class="mt-2">The sample projects in the course include:</p>
-                            <ul class="list-disc pl-6 mt-2">
+                            <ul class="pl-6 mt-2 list-disc">
                                 <li>Find my pet: a product that allows people to track down wayward pets who have got
                                     lost.
                                 </li>
@@ -92,8 +108,8 @@
                             </p>
                         </div>
                     </div>
-                    <div class="mt-4 flex justify-start">
-                        <button @click="toggleExpansion" class="text-purple-600 font-bold hover:underline">
+                    <div class="flex justify-start mt-4">
+                        <button @click="toggleExpansion" class="font-bold text-purple-600 hover:underline">
                             {{ expanded ? 'Show less' : 'Show more' }}
                         </button>
                     </div>
@@ -102,19 +118,3 @@
         </div>
     </div>
 </template>
-
-<script>
-export default {
-    name: 'CourseDescription',
-    data() {
-        return {
-            expanded: false
-        }
-    },
-    methods: {
-        toggleExpansion() {
-            this.expanded = !this.expanded
-        }
-    }
-}
-</script>

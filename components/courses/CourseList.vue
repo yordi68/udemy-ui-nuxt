@@ -1,26 +1,3 @@
-<template>
-    <div :class="['py-8', scrolled ? '-mt-[580px]' : '']">
-        <div class="what-you-learn w-[60%] mx-auto flex flex-col items-start text-gray-800">
-            <div class="border border-gray-300 w-[67%] p-4">
-                <h2 class="text-2xl font-bold mb-4 font-sans">What you'll learn</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <div v-for="(item, index) in visibleItems" :key="index" class="flex items-start">
-                        <svg class="w-4 h-4 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                            </path>
-                        </svg>
-                        <span class="text-sm">{{ item }}</span>
-                    </div>
-                </div>
-                <button @click="toggleShowMore" class="font-bold text-purple-600 hover:underline pl-2 mt-4">
-                    {{ showMoreButtonText }}
-                </button>
-            </div>
-        </div>
-    </div>
-</template>
-
 <script>
 export default {
     data() {
@@ -31,7 +8,7 @@ export default {
                 'Continue to learn and grow as a developer, long after the course ends',
                 'Create a complicated yelp-like application from scratch',
                 'Make REAL web applications using cutting-edge technologies',
-                'Create static HTML and CSS portfolio sites',                
+                'Create static HTML and CSS portfolio sites',
                 'Recognize and prevent common security exploits like SQL-Injection & XSS',
                 'Create a blog application from scratch using Node, Express, and MongoDB',
                 'Deploy your applications and work with cloud databases',
@@ -76,7 +53,7 @@ export default {
             // Add the -mt-96 class when the user has scrolled 100px or more
             this.scrolled = window.scrollY > 250
         }
-    }, 
+    },
     mounted() {
         window.addEventListener('scroll', this.handleScroll)
     },
@@ -85,3 +62,26 @@ export default {
     }
 }
 </script>
+
+<template>
+    <div :class="['py-8', scrolled ? '-mt-[580px]' : '']">
+        <div class="what-you-learn w-[60%] mx-auto flex flex-col items-start text-gray-800">
+            <div class="border border-gray-300 w-[67%] p-4">
+                <h2 class="mb-4 font-sans text-2xl font-bold">What you'll learn</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div v-for="(item, index) in visibleItems" :key="index" class="flex items-start">
+                        <svg class="flex-shrink-0 w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        <span class="text-sm">{{ item }}</span>
+                    </div>
+                </div>
+                <button @click="toggleShowMore" class="pl-2 mt-4 font-bold text-purple-600 hover:underline">
+                    {{ showMoreButtonText }}
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
